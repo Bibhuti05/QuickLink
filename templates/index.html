@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Welcome to Quick Link url shortner. {% endblock %}</h1>
+    <p>Quick Link is a super simple, intuitive, dummy proof url shortner. It simply does one and only one thing...</p>
+    <form method="post">
+    <div class="form-group">
+        <label for="url">URL</label>
+        <input type="text" name="url"
+               placeholder="URL to shorten" class="form-control"
+               value="{{ request.form['url'] }}" autofocus style="border-radius: 10px; height: 50px; background-color: rgb(12, 12, 12); color: rgb(63, 137, 248);"></input>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+
+    {% if short_url %}
+    <div  style=" background-color:rgb(95, 80, 32); padding: 7px; color: rgb(255, 255, 255); border-radius: 5px;">
+        <h4 style="margin: 5px;">Short Url: {{short_url}} |  or click <a href="{{short_url}}" >🧭</a></h4>
+        
+    </div>
+
+    {% endif %}
+
+    <h1 style="margin-top: 100px;">Public History </h1>
+    <table class="table" style="color: white;">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Short</th>
+            <th scope="col">Original</th>
+            <th scope="col">Clicks</th>
+            <th scope="col">Creation Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url in urlstat %}
+                <tr>
+                    <th scope="row">{{ url['id'] }}</th>
+                    <td>{{ url['short_url'] }}</td>
+                    <td>{{ url['original_url'] }}</td>
+                    <td>{{ url['clicks'] }}</td>
+                    <td>{{ url['created'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
