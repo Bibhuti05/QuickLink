@@ -19,9 +19,11 @@ Or look for Dependencies imported in the app.py incase of missing requirements.t
 python 3.10.12
 
 
+
 ```
 cd QuickLink
 source venv/bin/activate
+python3 init_db.py
 flask run
 ```
 incase of venv not working
